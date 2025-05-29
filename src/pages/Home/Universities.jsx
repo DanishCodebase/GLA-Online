@@ -10,10 +10,12 @@ import amity from "@/assets/universities/amity-logo.png";
 import gla from "@/assets/universities/gla-logo.png";
 import parul from "@/assets/universities/parul-logo.png";
 import cu from "@/assets/universities/cu-logo.webp";
-import sharda from "@/assets/universities/sharda-logo.png";
+import sharda from "@/assets/universities/sharda-online.png";
 import lpu from "@/assets/universities/lovelypu-logo.jpg";
 import upes from "@/assets/universities/upestomorrow_logo.png";
 import galgotia from "@/assets/universities/galgotia-logo.png";
+import mmu from "@/assets/universities/mmu-logo.png";
+import geu from "@/assets/universities/geu-online.png";
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import {
@@ -114,6 +116,42 @@ export default function Universities() {
         "Comprehensive Career Support Services",
         "Robust Digital Learning Infrastructure",
         "UGC Entitles University",
+      ],
+    },
+    {
+      id: 8,
+      name: "Sharda University Online",
+      logo: sharda,
+      fee: "1,00,000",
+      description: [
+        "Dedicated Student Support",
+        "UGC-DEB Approved for Online Learning",
+        "AI-Powered Learning Platform",
+        "Global Exposure and Diverse Peer Group",
+      ],
+    },
+    {
+      id: 9,
+      name: "MMU University",
+      logo: mmu,
+      fee: "1,40,000",
+      description: [
+        "Classroom-like online learning with real-time engagement",
+        "Study anytime, anywhere with full flexibility",
+        "UGC-approved courses for assured career growth",
+        "Learn from top academicians and industry experts",
+      ],
+    },
+    {
+      id: 10,
+      name: "GEU University",
+      logo: geu,
+      fee: "80,000",
+      description: [
+        "Flexible learning – Study anytime, anywhere",
+        "Affordable & high ROI – Lower fees, high salary potential", 
+        "Strong industry network – Connect with experts & alumni",
+        "Career acceleration – Fast-track promotions & leadership roles"
       ],
     },
   ];
