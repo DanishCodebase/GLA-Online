@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import HeroSection from "@/pages/Home/HeroSection";
 import Hero from "@/pages/Home/Hero";
 import WhoShouldEnroll from "@/pages/Home/WhoShouldEnroll";
 import Universities from "@/pages/Home/Universities";
@@ -24,7 +25,8 @@ const App = () => {
   return (
     <div>
       <AdmissionQuery utmParams={utmParams} />
-      <Hero />
+      <HeroSection />
+      {/* <Hero /> */}
       <Universities />
       <WhoShouldEnroll />
       <Benefits />
