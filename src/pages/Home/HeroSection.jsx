@@ -32,7 +32,7 @@ export default function HeroSection() {
         <Card className="overflow-hidden shadow-2xl border-0 py-0 bg-white">
           <div className="grid lg:grid-cols-2 gap-0">
             {/* Content Section */}
-            <div className="p-8 lg:p-12 flex flex-col justify-center">
+            <div className="p-8 order-2 lg:order-1 lg:p-12 flex flex-col justify-center">
               <div className="space-y-8">
                 {/* Header */}
                 <div className="space-y-4">
@@ -107,7 +107,7 @@ export default function HeroSection() {
             </div>
 
             {/* Image Section */}
-            <div className="relative bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+            <div className="relative order-1 lg:order-2 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
               <img
                 src="https://www.upgrad.com/_ww3-next/image/?url=https%3A%2F%2Fd2o2utebsixu4k.cloudfront.net%2FVP_VPBanner_VP_HeroBanner_dWeb%20MBA%20(1)%20(1)-70997669bd1a4ba2b565901e0eae2fa5.webp&w=1920&q=75"
                 alt="MBA students studying online"
