@@ -270,7 +270,7 @@ export default function AdmissionQuery({ utmParams }) {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full p-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg hover:shadow-lg transition-all duration-300 text-sm font-medium mt-2 flex items-center justify-center gap-2 group disabled:opacity-70"
+                    className="w-full p-3 bg-gradient-to-r from-green-700 to-green-400 text-white rounded-lg hover:shadow-lg transition-all duration-300 text-sm font-medium mt-2 flex items-center justify-center gap-2 group disabled:opacity-70"
                   >
                     {isSubmitting ? "Submitting..." : "Submit Query"}
                     <Send className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
