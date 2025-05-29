@@ -29,7 +29,7 @@ const faqData = [
     id: 5,
     question: "What are the fees for UPES online MBA?",
     answer:
-      "The University of Petroleum and Energy Studies (UPES) offers an online MBA program with fees typically ranging from INR 1,00,000 to INR 2,00,000 depending on the specialization and course duration. UPES is known for its focus on energy and infrastructure sectors, along with traditional MBA specializations.",
+      "The (UPES) offers an online MBA program with fees typically ranging from INR 1,00,000 to INR 2,00,000 depending on the specialization and course duration. UPES is known for its focus on energy and infrastructure sectors, along with traditional MBA specializations.",
   },
 ];
 
