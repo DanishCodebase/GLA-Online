@@ -30,7 +30,7 @@ export default function HeroSection() {
   return (
     <section className="py-10 px-4 bg-white">
       <div className="max-w-7xl mx-auto">
-        <Card className="overflow-hidden shadow-2xl border-0 py-0 bg-white">
+        {/* <div className="overflow-hidden shadow-2xl border-0 py-0 bg-white"> */}
           <div className="grid lg:grid-cols-2 gap-0">
             {/* Content Section */}
             <div className="p-8 order-2 lg:order-1 lg:p-12 flex flex-col justify-center">
@@ -108,17 +108,17 @@ export default function HeroSection() {
             </div>
 
             {/* Image Section */}
-            <div className="relative order-1 lg:order-2 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+            <div className="relative order-1 lg:order-2 flex items-center justify-center overflow-hidden">
               <img
                 src={mba}
                 alt="MBA students studying online"
-                className="w-full h-full object-cover"
+                className="w-full h-full object-cover rounded-2xl"
                 priority
               />
             </div>
           </div>
-        </Card>
-      </div>
+        </div>
+      {/* </div> */}
     </section>
   );
 }
