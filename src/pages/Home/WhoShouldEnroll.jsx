@@ -41,7 +41,7 @@ export default function WhoShouldEnroll() {
           </div> */}
           <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6 leading-tight">
             Who Should Enroll For
-            <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+            <span className="block bg-green-500 bg-clip-text text-transparent">
               Online MBA
             </span>
           </h2>

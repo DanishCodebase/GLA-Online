@@ -36,27 +36,23 @@ export default function HeroSection() {
         <Card className="overflow-hidden shadow-2xl border-0 py-0 bg-white">
           <div className="grid lg:grid-cols-12 gap-0 relative">
             {/* Content Section */}
-            <div className="p-8 lg:col-span-7 overflow-hidden rounded-3xl shadow-2xl border-0 py-0 bg-white order-2 lg:order-1 lg:p-12 flex flex-col justify-center relative z-10">
+            <div className="p-8 lg:col-span-7 overflow-hidden rounded-3xl shadow-2xl border-0 py-6 bg-white order-2 lg:order-1 lg:p-12 flex flex-col justify-center relative z-10">
               <div className="space-y-8">
                 {/* Header */}
                 <div className="space-y-4">
                   <h1 className="text-3xl lg:text-4xl font-bold leading-tight">
                     <span className="text-green-500">
-                      Online MBA Degree Courses
+                      Online MBA Degree Programs
                     </span>{" "}
-                    <br />
+                    <br className="hidden lg:block" />
                     <span className="text-gray-700 text-3xl lg:text-4xl">
-                      from India's Top B-schools
+                      from India's Top Universities & Colleges
                     </span>
                   </h1>
 
                   <p className="text-lg text-gray-600 leading-relaxed max-w-lg">
-                    Start your transformative journey with a 100% Online MBA
-                    Program from top B-schools in India and Abroad, designed for
-                    professionals aiming to accelerate their careers while
-                    maintaining a flexible study schedule. MBA can be your
-                    gateway to career opportunities, leadership roles, and
-                    entrepreneurial success.
+                    Advance with an Online MBA that blends academic excellence
+                    and practical skills—anytime, anywhere.
                   </p>
                 </div>
 
@@ -79,16 +75,16 @@ export default function HeroSection() {
 
                 {/* Call to Action Buttons */}
                 {/* <div className="flex flex-col sm:flex-row gap-4 pt-4"> */}
-                  <Button
-                    variant="outline"
-                    size="lg"
-                    className="flex-1 sm:flex-none bg-green-500 hover:bg-green-600 text-white hover:text-white/90 transition-all duration-200 h-12 px-6"
-                    onClick={openAdmissionForm}
-                  >
-                    <MessageCircle className="w-5 h-5 mr-2" />
-                    Get Free Career Counselling
-                  </Button>
-                  {/* <Button
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="flex-1 sm:flex-none bg-green-500 hover:bg-green-600 text-white hover:text-white/90 transition-all duration-200 h-12 px-6"
+                  onClick={openAdmissionForm}
+                >
+                  <MessageCircle className="w-5 h-5 mr-2" />
+                  Get Free Career Counselling
+                </Button>
+                {/* <Button
                     size="lg"
                     className="flex-1 sm:flex-none bg-red-500 hover:bg-red-600 text-white h-12 px-6 shadow-lg hover:shadow-xl transition-all duration-200"
                   >
@@ -112,11 +108,11 @@ export default function HeroSection() {
             </div>
 
             {/* Image Section */}
-            <div className="sm:absolute right-0 z-[5] lg:col-span-5 order-1 lg:order-2 flex items-center justify-center overflow-hidden h-full">
+            <div className="absolute right-0 z-[5] lg:col-span-5 order-1 lg:order-2 hidden sm:flex items-center justify-center overflow-hidden h-full">
               <img
                 src={mba}
                 alt="MBA students studying online"
-                className="w-full h-full object-cover rounded-2xl"
+                className="w-full h-[600px] object-cover rounded-2xl"
                 priority
               />
             </div>

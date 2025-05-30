@@ -171,7 +171,7 @@ export default function Universities() {
       fee: "1,40,000",
       description: [
         "Comprehensive Curriculum & Specializations",
-        "Academic Excellence & Accreditations", 
+        "Academic Excellence & Accreditations",
         "Career Support & Practical Exposure",
         "Personalized Mentorship & Support",
       ],
@@ -228,14 +228,14 @@ export default function Universities() {
             World-Class Universities
           </div> */}
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-            Your Gateway to
-            <span className="text-blue-600 block">Academic Excellence</span>
+            Choose your Online MBA Degree {" "}
+            <span className="text-green-500 sm:block">from Top Universities</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          {/* <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Discover prestigious institutions that shape tomorrow's leaders.
             Each university offers unique opportunities for growth, innovation,
             and academic achievement.
-          </p>
+          </p> */}
         </div>
 
         {/* Mobile/Tablet Accordion View */}
