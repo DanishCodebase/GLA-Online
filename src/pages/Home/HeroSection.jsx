@@ -38,7 +38,7 @@ export default function HeroSection() {
                 {/* Header */}
                 <div className="space-y-4">
                   <h1 className="text-3xl lg:text-4xl font-bold leading-tight">
-                    <span className="text-red-500">
+                    <span className="text-green-500">
                       Online MBA Degree Courses
                     </span>{" "}
                     <br />
@@ -79,7 +79,7 @@ export default function HeroSection() {
                   <Button
                     variant="outline"
                     size="lg"
-                    className="flex-1 sm:flex-none border-2 bg-red-500 hover:bg-red-600 text-white hover:text-white/90 transition-all duration-200 h-12 px-6"
+                    className="flex-1 sm:flex-none bg-green-500 hover:bg-green-600 text-white hover:text-white/90 transition-all duration-200 h-12 px-6"
                   >
                     <MessageCircle className="w-5 h-5 mr-2" />
                     Get Free Career Counselling
