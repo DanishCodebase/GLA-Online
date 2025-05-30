@@ -1,7 +1,7 @@
 import { Check, Phone, Download, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import mba from "@/assets/banners/mba.jpg";
+import mba from "@/assets/banners/mba.webp";
 import { useAdmissionForm } from "@/context/AdmissionFormContext";
 
 export default function HeroSection() {
@@ -16,27 +16,27 @@ export default function HeroSection() {
       label: "Study Mode:",
       value: "Fully online",
     },
-    {
-      label: "Accreditation:",
-      value: "AICTE, WES approved & AACSB accredited",
-    },
+    // {
+    //   label: "Accreditation:",
+    //   value: "AICTE, WES approved & AACSB accredited",
+    // },
     {
       label: "58% Average Hike",
       value: "across MBA courses",
     },
-    {
-      label: "EMI Options:",
-      value: "You'll have access to budget-friendly payment plans",
-    },
+    // {
+    //   label: "EMI Options:",
+    //   value: "You'll have access to budget-friendly payment plans",
+    // },
   ];
 
   return (
     <section className="py-10 px-4 bg-white">
       <div className="max-w-7xl mx-auto">
-        {/* <div className="overflow-hidden shadow-2xl border-0 py-0 bg-white"> */}
-          <div className="grid lg:grid-cols-2 gap-0">
+        <Card className="overflow-hidden shadow-2xl border-0 py-0 bg-white">
+          <div className="grid lg:grid-cols-12 gap-0 relative">
             {/* Content Section */}
-            <div className="p-8 order-2 lg:order-1 lg:p-12 flex flex-col justify-center">
+            <div className="p-8 lg:col-span-7 overflow-hidden rounded-3xl shadow-2xl border-0 py-0 bg-white order-2 lg:order-1 lg:p-12 flex flex-col justify-center relative z-10">
               <div className="space-y-8">
                 {/* Header */}
                 <div className="space-y-4">
@@ -46,11 +46,11 @@ export default function HeroSection() {
                     </span>{" "}
                     <br />
                     <span className="text-gray-700 text-3xl lg:text-4xl">
-                      from World's Top B-schools
+                      from India's Top B-schools
                     </span>
                   </h1>
 
-                  <p className="text-lg text-gray-600 leading-relaxed max-w-2xl">
+                  <p className="text-lg text-gray-600 leading-relaxed max-w-lg">
                     Start your transformative journey with a 100% Online MBA
                     Program from top B-schools in India and Abroad, designed for
                     professionals aiming to accelerate their careers while
@@ -78,7 +78,7 @@ export default function HeroSection() {
                 </div>
 
                 {/* Call to Action Buttons */}
-                <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                {/* <div className="flex flex-col sm:flex-row gap-4 pt-4"> */}
                   <Button
                     variant="outline"
                     size="lg"
@@ -95,7 +95,7 @@ export default function HeroSection() {
                     <Download className="w-5 h-5 mr-2" />
                     Download Brochure
                   </Button> */}
-                </div>
+                {/* </div> */}
 
                 {/* Contact Information */}
                 {/* <div className="flex items-center gap-2 pt-4 border-t border-gray-100">
@@ -112,7 +112,7 @@ export default function HeroSection() {
             </div>
 
             {/* Image Section */}
-            <div className="relative order-1 lg:order-2 flex items-center justify-center overflow-hidden">
+            <div className="sm:absolute right-0 z-[5] lg:col-span-5 order-1 lg:order-2 flex items-center justify-center overflow-hidden h-full">
               <img
                 src={mba}
                 alt="MBA students studying online"
@@ -121,8 +121,8 @@ export default function HeroSection() {
               />
             </div>
           </div>
-        </div>
-      {/* </div> */}
+        </Card>
+      </div>
     </section>
   );
 }

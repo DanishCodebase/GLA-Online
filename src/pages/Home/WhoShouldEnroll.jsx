@@ -2,12 +2,12 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Briefcase, Lightbulb, TrendingUp, GraduationCap, Users, Globe, Target, Rocket } from "lucide-react"
 
-export default function Component() {
+export default function WhoShouldEnroll() {
   const enrollmentCategories = [
     {
       icon: Briefcase,
       description:
-        "Professionals aiming to transition into managerial positions or start their own business",
+        "Professionals seeking management roles and business ownership",
       gradient: "from-blue-500 to-cyan-500",
     },
     {
@@ -39,7 +39,7 @@ export default function Component() {
             <Target className="w-6 h-6 text-blue-600" />
             <span className="text-sm font-semibold uppercase tracking-wider">Perfect Fit</span>
           </div> */}
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6 leading-tight">
+          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6 leading-tight">
             Who Should Enroll For
             <span className="block bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
               Online MBA

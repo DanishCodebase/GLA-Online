@@ -21,6 +21,7 @@ import upes from "@/assets/universities/upestomorrow_logo.png";
 import galgotia from "@/assets/universities/galgotia-logo.png";
 import mmu from "@/assets/universities/mmu-logo.png";
 import geu from "@/assets/universities/geu-online.png";
+import uttaranchal from "@/assets/universities/uttaranchal-logo.png";
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import {
@@ -163,6 +164,18 @@ export default function Universities() {
         "Career acceleration – Fast-track promotions & leadership roles",
       ],
     },
+    {
+      id: 11,
+      name: "Uttaranchal University",
+      logo: uttaranchal,
+      fee: "1,40,000",
+      description: [
+        "Comprehensive Curriculum & Specializations",
+        "Academic Excellence & Accreditations", 
+        "Career Support & Practical Exposure",
+        "Personalized Mentorship & Support",
+      ],
+    },
   ];
 
   const [api, setApi] = useState();
@@ -197,7 +210,7 @@ export default function Universities() {
 
   return (
     <section className="py-16 px-4 bg-white relative">
-      <div className="absolute inset-0 opacity-5 pointer-events-none">
+      <div className="hidden sm:block absolute inset-0 opacity-5 pointer-events-none">
         <div
           className="w-full h-full"
           style={{

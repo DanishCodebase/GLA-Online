@@ -7,7 +7,7 @@ import Benefits from "@/pages/Home/Benefits";
 import FAQ from "@/pages/Home/FAQ";
 import AdmissionQuery from "@/pages/Home/AdmissionQuery";
 import { AdmissionFormProvider } from "@/context/AdmissionFormContext";
-
+import Header from "@/pages/Header/Header";
 const App = () => {
   const [utmParams, setUtmParams] = useState({
     source: "",
@@ -26,6 +26,7 @@ const App = () => {
   return (
     <AdmissionFormProvider>
       <AdmissionQuery utmParams={utmParams} />
+      <Header />
       <HeroSection />
       {/* <Hero /> */}
       <Universities />
