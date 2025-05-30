@@ -37,8 +37,12 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import Autoplay from "embla-carousel-autoplay";
+import { useAdmissionForm } from "@/context/AdmissionFormContext";
+
+const ITEMS_PER_PAGE = 6;
 
 export default function Universities() {
+  const { openAdmissionForm } = useAdmissionForm();
   const universities = [
     {
       id: 1,
@@ -164,6 +168,8 @@ export default function Universities() {
   const [api, setApi] = useState();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
+  const [visibleUniversities, setVisibleUniversities] =
+    useState(ITEMS_PER_PAGE);
 
   const plugin = useRef(
     Autoplay({ delay: 5000, stopOnInteraction: true, stopOnMouseEnter: true })
@@ -267,6 +273,7 @@ export default function Universities() {
                     <Button
                       className="w-full bg-black hover:bg-black/80 text-white font-semibold py-2.5 rounded-xl transition-all duration-300"
                       size="md"
+                      onClick={openAdmissionForm}
                     >
                       Apply Now
                       <ArrowRight className="w-4 h-4 ml-2" />
@@ -323,6 +330,7 @@ export default function Universities() {
                     <Button
                       className="w-full bg-black hover:bg-black/80 text-white font-semibold py-2.5 rounded-xl transition-all duration-300 group-hover:shadow-lg"
                       size="md"
+                      onClick={openAdmissionForm}
                     >
                       Apply Now
                       <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />

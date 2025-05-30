@@ -6,6 +6,7 @@ import { submitAdmissionQuery } from "@/pages/Home/crm";
 import { toast } from "sonner";
 import { getAllStates, getCitiesForState } from "@/pages/Home/stateData";
 import { useNavigate } from "react-router-dom";
+import { useAdmissionForm } from "@/context/AdmissionFormContext";
 
 const formFields = [
   {
@@ -83,7 +84,7 @@ const initialFormData = {
 };
 
 export default function AdmissionQuery({ utmParams }) {
-  const [isOpen, setIsOpen] = useState(false);
+  const { isAdmissionFormOpen, openAdmissionForm, closeAdmissionForm } = useAdmissionForm();
   const [formData, setFormData] = useState(initialFormData);
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -131,10 +132,10 @@ export default function AdmissionQuery({ utmParams }) {
 
     setIsSubmitting(true);
     try {
-      await submitAdmissionQuery(formData, navigate);
+      await submitAdmissionQuery(formData, utmParams);
       toast.success("Form submitted successfully!");
       setFormData(initialFormData);
-      setIsOpen(false);
+      closeAdmissionForm();
     } catch (error) {
       toast.error("Failed to submit form. Please try again.");
       console.error("Form submission error:", error);
@@ -146,11 +147,11 @@ export default function AdmissionQuery({ utmParams }) {
   return (
     <>
       <AnimatePresence>
-        {!isOpen && (
+        {!isAdmissionFormOpen && (
           <motion.button
             className="fixed right-[8px] top-1/3 -translate-y-1/2 bg-gradient-to-r from-green-700 to-green-400 text-white px-8 py-4 -rotate-90 origin-right z-50 hover:shadow-lg transition-all duration-300 rounded-t-lg font-medium tracking-wide"
             style={{ transformOrigin: "calc(100% - 8px) 50%" }}
-            onClick={() => setIsOpen(true)}
+            onClick={openAdmissionForm}
             initial={{ x: 0 }}
             whileHover={{ x: -5, scale: 1.02 }}
             exit={{ x: 100 }}
@@ -162,14 +163,14 @@ export default function AdmissionQuery({ utmParams }) {
           </motion.button>
         )}
 
-        {isOpen && (
+        {isAdmissionFormOpen && (
           <>
             <motion.div
               className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              onClick={() => setIsOpen(false)}
+              onClick={closeAdmissionForm}
             />
 
             <motion.div
@@ -190,7 +191,7 @@ export default function AdmissionQuery({ utmParams }) {
                     </p>
                   </div>
                   <button
-                    onClick={() => setIsOpen(false)}
+                    onClick={closeAdmissionForm}
                     className="p-2 hover:bg-gray-100 rounded-full transition-colors"
                   >
                     <X className="w-5 h-5 text-gray-500" />
