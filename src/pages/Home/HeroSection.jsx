@@ -1,6 +1,7 @@
 import { Check, Phone, Download, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import mba from "@/assets/banners/mba.jpg";
 
 export default function HeroSection() {
   const features = [
@@ -74,26 +75,26 @@ export default function HeroSection() {
                 </div>
 
                 {/* Call to Action Buttons */}
-                {/* <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                <div className="flex flex-col sm:flex-row gap-4 pt-4">
                   <Button
                     variant="outline"
                     size="lg"
-                    className="flex-1 sm:flex-none border-2 border-gray-300 hover:border-red-500 hover:text-red-500 transition-all duration-200 h-12 px-6"
+                    className="flex-1 sm:flex-none border-2 bg-red-500 hover:bg-red-600 text-white hover:text-white/90 transition-all duration-200 h-12 px-6"
                   >
                     <MessageCircle className="w-5 h-5 mr-2" />
                     Get Free Career Counselling
                   </Button>
-                  <Button
+                  {/* <Button
                     size="lg"
                     className="flex-1 sm:flex-none bg-red-500 hover:bg-red-600 text-white h-12 px-6 shadow-lg hover:shadow-xl transition-all duration-200"
                   >
                     <Download className="w-5 h-5 mr-2" />
                     Download Brochure
-                  </Button>
-                </div> */}
+                  </Button> */}
+                </div>
 
                 {/* Contact Information */}
-                <div className="flex items-center gap-2 pt-4 border-t border-gray-100">
+                {/* <div className="flex items-center gap-2 pt-4 border-t border-gray-100">
                   <Phone className="w-4 h-4 text-gray-500" />
                   <span className="text-gray-600">For enquiries call:</span>
                   <a
@@ -102,14 +103,14 @@ export default function HeroSection() {
                   >
                     1800 210 2020
                   </a>
-                </div>
+                </div> */}
               </div>
             </div>
 
             {/* Image Section */}
             <div className="relative order-1 lg:order-2 bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
               <img
-                src="https://www.upgrad.com/_ww3-next/image/?url=https%3A%2F%2Fd2o2utebsixu4k.cloudfront.net%2FVP_VPBanner_VP_HeroBanner_dWeb%20MBA%20(1)%20(1)-70997669bd1a4ba2b565901e0eae2fa5.webp&w=1920&q=75"
+                src={mba}
                 alt="MBA students studying online"
                 className="w-full h-full object-cover"
                 priority
