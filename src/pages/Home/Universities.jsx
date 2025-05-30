@@ -229,7 +229,7 @@ export default function Universities() {
           </div> */}
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
             Choose your Online MBA Degree {" "}
-            <span className="text-green-500 sm:block">from Top Universities</span>
+            <span className="text-green-500 sm:block">from Top Universities & Colleges</span>
           </h2>
           {/* <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Discover prestigious institutions that shape tomorrow's leaders.
