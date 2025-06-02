@@ -58,7 +58,7 @@ export default function Universities() {
     },
     {
       id: 2,
-      name: "GLA Online University",
+      name: "GLA University",
       logo: gla,
       fee: "₹1,05,000",
       description: [
