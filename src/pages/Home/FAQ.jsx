@@ -3,27 +3,27 @@ import React, { useState, useRef, useEffect } from "react";
 const faqData = [
   {
     id: 1,
-    question: "What are the top 10 online MBA programs in the world?",
+    question: "What are the top colleges for online MBA in India?",
     answer:
-      "The top 10 online MBA programs globally often include institutions such as the University of Warwick, lE Business School, Indiana University Kelley School of Business, University of North Carolina (Kenan-Flagler), and the University of Florida (Hough), among others. These programs are recognized for their high academic standards, faculty, and global recognition.",
+      "Top colleges for online MBA in India include Amity University Online, GLA Online University, Parul University, Chandigarh University, Lovely Professional University, UPES Online, Galgotia University, Sharda University Online, MMU University, GEU University, and Uttaranchal University and many more. These institutions are recognized for their quality education, flexible learning options, and comprehensive curricula.",
   },
   {
     id: 2,
+    question: "What are the fees for the GLA online MBA program?",
+    answer:
+      "The fees for GLA University’s online MBA program can vary based on the specialization and course duration. Generally, the fees range from INR 50,000 to INR 80,000 for the entire program. It’s recommended to visit GLA University’s official website for the most accurate and updated fee structure.",
+  },
+  {
+    id: 3,
     question: "What are the reviews for Chandigarh University's online MBA?",
     answer:
       "Chandigarh University’s online MBA program is appreciated for its affordability, extensive course offerings, and student support services. The program is designed to cater to working professionals and offers various specializations. Reviews generally highlight the program’s practicality and value for money.",
   },
   {
-    id: 3,
-    question: "What is an Executive Masters online program?",
-    answer:
-      "Executive Master’s programs, often available online, are advanced degree programs aimed at professionals with significant work experience. These programs focus on leadership, strategic thinking, and advanced management skills, catering to executives looking to advance their careers.",
-  },
-  {
     id: 4,
-    question: "What are the fees for the GLA online MBA program?",
+    question: "Which is the best online MBA program in Finance in India?",
     answer:
-      "The fees for GLA University’s online MBA program can vary based on the specialization and course duration. Generally, the fees range from INR 50,000 to INR 80,000 for the entire program. It’s recommended to visit GLA University’s official website for the most accurate and updated fee structure.",
+      "Several institutions offer highly regarded online MBA programs in Finance, including NMIMS Global Access, Symbiosis Centre for Distance Learning, and Amity University Online. These programs provide a robust curriculum focusing on financial management, investment analysis, and market operations.",
   },
   {
     id: 5,
