@@ -45,7 +45,7 @@ export default function HeroSection() {
         <Card className="overflow-hidden rounded-sm shadow-2xl border-0 py-0 bg-white">
           <div className="grid lg:grid-cols-12 gap-0 relative">
             {/* Content Section */}
-            <div className="p-8 lg:col-span-7 overflow-hidden rounded-sm rounded-r-3xl shadow-2xl border-0 py-6 bg-white order-2 lg:order-1 lg:p-12 flex flex-col justify-center relative z-10">
+            <div className="p-8 lg:col-span-7 overflow-hidden rounded-sm md:rounded-r-3xl shadow-2xl border-0 py-6 bg-white order-2 lg:order-1 lg:p-12 flex flex-col justify-center relative z-10">
               <div className="space-y-8">
                 {/* Header */}
                 <div className="space-y-4">

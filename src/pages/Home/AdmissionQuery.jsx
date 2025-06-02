@@ -36,22 +36,22 @@ const formFields = [
     validation: (value) => /^[0-9]{10}$/.test(value),
     errorMessage: "Please enter a valid 10-digit phone number",
   },
-  {
-    name: "coursesid",
-    label: "Course",
-    type: "select",
-    placeholder: "Select a course",
-    required: true,
-    validation: (value) => value !== "",
-    errorMessage: "Please select a course",
-    options: [
-      { value: "1500", label: "B.Tech" },
-      { value: "1550", label: "B.Tech (AI & ML)" },
-      { value: "4201", label: "BCA" },
-      { value: "4101", label: "BBA" },
-      { value: "8410", label: "MBA" },
-    ],
-  },
+  // {
+  //   name: "coursesid",
+  //   label: "Course",
+  //   type: "select",
+  //   placeholder: "Select a course",
+  //   required: true,
+  //   validation: (value) => value !== "",
+  //   errorMessage: "Please select a course",
+  //   options: [
+  //     { value: "1500", label: "B.Tech" },
+  //     { value: "1550", label: "B.Tech (AI & ML)" },
+  //     { value: "4201", label: "BCA" },
+  //     { value: "4101", label: "BBA" },
+  //     { value: "8410", label: "MBA" },
+  //   ],
+  // },
   {
     name: "stateid",
     label: "State",
@@ -174,13 +174,13 @@ export default function AdmissionQuery({ utmParams }) {
             />
 
             <motion.div
-              className="fixed right-0 top-1/2 -translate-y-1/2 w-full max-w-sm z-50 rounded-l-xl shadow-2xl"
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className="fixed px-3 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-sm z-50 rounded-xl shadow-2xl"
+              initial={{ y: "-100%" }}
+              animate={{ y: 0 }}
+              exit={{ y: "-100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 1000 }}
             >
-              <div className="bg-gradient-to-br from-white to-gray-50 p-6 rounded-l-xl">
+              <div className="bg-gradient-to-br from-white to-gray-50 p-6 rounded-xl">
                 <div className="flex justify-between items-center mb-6">
                   <div>
                     <h2 className="text-2xl font-bold bg-gradient-to-r from-cusGreen to-cusGreenLight text-transparent bg-clip-text">
