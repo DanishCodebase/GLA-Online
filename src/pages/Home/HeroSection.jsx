@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import mba from "@/assets/banners/mba.webp";
 import { useAdmissionForm } from "@/context/AdmissionFormContext";
+import graduation from "@/assets/banners/graduation-cap.jpg";
 
 export default function HeroSection() {
   const { openAdmissionForm } = useAdmissionForm();
@@ -31,12 +32,20 @@ export default function HeroSection() {
   ];
 
   return (
-    <section className="py-10 px-4 bg-white">
+    <section className="py-10 px-4">
+      <div className="absolute inset-0 ">
+        <img
+          src={mba}
+          alt="MBA students studying online"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black opacity-50"></div>
+      </div>
       <div className="max-w-7xl mx-auto">
-        <Card className="overflow-hidden shadow-2xl border-0 py-0 bg-white">
+        <Card className="overflow-hidden rounded-sm shadow-2xl border-0 py-0 bg-white">
           <div className="grid lg:grid-cols-12 gap-0 relative">
             {/* Content Section */}
-            <div className="p-8 lg:col-span-7 overflow-hidden rounded-3xl shadow-2xl border-0 py-6 bg-white order-2 lg:order-1 lg:p-12 flex flex-col justify-center relative z-10">
+            <div className="p-8 lg:col-span-7 overflow-hidden rounded-sm rounded-r-3xl shadow-2xl border-0 py-6 bg-white order-2 lg:order-1 lg:p-12 flex flex-col justify-center relative z-10">
               <div className="space-y-8">
                 {/* Header */}
                 <div className="space-y-4">
