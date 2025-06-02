@@ -183,12 +183,12 @@ export default function AdmissionQuery({ utmParams }) {
               <div className="bg-gradient-to-br from-white to-gray-50 p-6 rounded-xl">
                 <div className="flex justify-between items-center mb-6">
                   <div>
-                    <h2 className="text-2xl font-bold bg-gradient-to-r from-cusGreen to-cusGreenLight text-transparent bg-clip-text">
-                      Admission Query
+                    <h2 className="text-2xl font-bold bg-gray-900 text-transparent bg-clip-text">
+                      Apply for Online MBA
                     </h2>
-                    <p className="text-gray-600 text-sm mt-1">
+                    {/* <p className="text-gray-600 text-sm mt-1">
                       Fill the form below and we'll get back to you
-                    </p>
+                    </p> */}
                   </div>
                   <button
                     onClick={closeAdmissionForm}
