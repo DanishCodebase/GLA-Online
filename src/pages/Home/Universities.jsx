@@ -54,6 +54,7 @@ export default function Universities() {
         "Globally Recognized Accreditation",
         "Industry-Relevant Curriculum with Practical Exposure",
         "Flexible Learning with Career Support",
+        "beSocial: 15,000+ Students Connect and Grow",
       ],
     },
     {
@@ -228,8 +229,10 @@ export default function Universities() {
             World-Class Universities
           </div> */}
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-            Choose your Online MBA Degree {" "}
-            <span className="text-green-500 sm:block">from Top Universities & Colleges</span>
+            Choose your Online MBA Degree{" "}
+            <span className="text-green-500 sm:block">
+              from Top Universities & Colleges
+            </span>
           </h2>
           {/* <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Discover prestigious institutions that shape tomorrow's leaders.
