@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { X, ArrowRight, Send } from "lucide-react";
-import { submitAdmissionQuery } from "@/pages/Home/crm";
+// import { submitAdmissionQuery } from "@/pages/Home/crm";
 
 import { toast } from "sonner";
 import { getAllStates, getCitiesForState } from "@/pages/Home/stateData";
-import { useNavigate } from "react-router-dom";
 import { useAdmissionForm } from "@/context/AdmissionFormContext";
 
 const formFields = [
@@ -33,8 +32,9 @@ const formFields = [
     type: "tel",
     placeholder: "Enter your phone number",
     required: true,
-    validation: (value) => /^[0-9]{10}$/.test(value),
-    errorMessage: "Please enter a valid 10-digit phone number",
+    validation: (value) => /^[6-9][0-9]{9}$/.test(value),
+    errorMessage:
+      "Please enter a valid 10-digit phone number starting with 6, 7, 8, or 9",
   },
   // {
   //   name: "coursesid",
@@ -53,7 +53,7 @@ const formFields = [
   //   ],
   // },
   {
-    name: "stateid",
+    name: "state",
     label: "State",
     type: "select",
     placeholder: "Select your state",
@@ -63,7 +63,7 @@ const formFields = [
     options: getAllStates(),
   },
   {
-    name: "cityid",
+    name: "city",
     label: "City",
     type: "select",
     placeholder: "Select your city",
@@ -78,27 +78,37 @@ const initialFormData = {
   name: "",
   email: "",
   phone: "",
-  coursesid: "",
-  stateid: "",
-  cityid: "",
+  // coursesid: "",
+  state: "",
+  city: "",
 };
 
 export default function AdmissionQuery({ utmParams }) {
-  const { isAdmissionFormOpen, openAdmissionForm, closeAdmissionForm } = useAdmissionForm();
+  const { isAdmissionFormOpen, openAdmissionForm, closeAdmissionForm } =
+    useAdmissionForm();
   const [formData, setFormData] = useState(initialFormData);
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [cities, setCities] = useState([]);
-//   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    let { name, value } = e.target;
+
+    if (name === "name") {
+      value = value.replace(/[^a-zA-Z\s]/g, "");
+    } else if (name === "phone") {
+      value = value.replace(/[^0-9]/g, "");
+      if (value.length > 10) {
+        value = value.slice(0, 10);
+      }
+    }
+
     setFormData((prev) => ({ ...prev, [name]: value }));
     setErrors((prev) => ({ ...prev, [name]: validateField(name, value) }));
 
-    if (name === "stateid") {
+    if (name === "state") {
       // Reset city when state changes
-      setFormData((prev) => ({ ...prev, cityid: "" }));
+      setFormData((prev) => ({ ...prev, city: "" }));
       // Get cities for selected state
       const stateCities = getCitiesForState(value);
       setCities(stateCities);
@@ -127,20 +137,89 @@ export default function AdmissionQuery({ utmParams }) {
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
+      toast.error("Please fill in all required fields correctly.");
+      return;
+    }
+
+    // Frontend check for duplicate phone number using localStorage
+    let submittedPhoneNumbers =
+      JSON.parse(localStorage.getItem("submittedPhoneNumbers")) || [];
+    if (submittedPhoneNumbers.includes(formData.phone)) {
+      toast.warning(
+        "This phone number has already been used to submit a query during this session."
+      );
       return;
     }
 
     setIsSubmitting(true);
+
+    const dataToSend = {
+      ...formData,
+      campaign: utmParams?.campaign || utmParams?.utm_campaign,
+      utm_source: utmParams?.utm_source,
+      utm_medium: utmParams?.utm_medium,
+      utm_term: utmParams?.utm_term,
+      utm_content: utmParams?.utm_content,
+    };
+
     try {
-      await submitAdmissionQuery(formData, utmParams);
-      toast.success("Form submitted successfully!");
-      setFormData(initialFormData);
-      closeAdmissionForm();
+      const response = await fetch("https://nocolleges.com/submit.php", {
+        method: "POST",
+        body: JSON.stringify(dataToSend),
+      });
+
+      const responseData = await response.json(); // Parse the JSON response
+
+      if (responseData.success) {
+        toast.success(responseData.message || "Form submitted successfully!");
+        if (!submittedPhoneNumbers.includes(formData.phone)) {
+          submittedPhoneNumbers.push(formData.phone);
+          localStorage.setItem(
+            "submittedPhoneNumbers",
+            JSON.stringify(submittedPhoneNumbers)
+          );
+        }
+        setFormData(initialFormData);
+        setErrors({});
+        closeAdmissionForm();
+        window.location.href = "/thanks.html";
+      } else {
+        if (responseData.isDuplicate) {
+          toast.error(
+            responseData.message ||
+              "This phone number has already been used to submit an inquiry."
+          );
+          if (!submittedPhoneNumbers.includes(formData.phone)) {
+            submittedPhoneNumbers.push(formData.phone);
+            localStorage.setItem(
+              "submittedPhoneNumbers",
+              JSON.stringify(submittedPhoneNumbers)
+            );
+          }
+        } else {
+          toast.error(
+            responseData.message || "Failed to submit form. Please try again."
+          );
+        }
+      }
     } catch (error) {
-      toast.error("Failed to submit form. Please try again.");
+      toast.error("An unexpected error occurred. Please try again.");
       console.error("Form submission error:", error);
     } finally {
       setIsSubmitting(false);
+    }
+  };
+
+  const handlePhoneBlur = () => {
+    const phone = formData.phone;
+    if (/^[6-9][0-9]{9}$/.test(phone)) {
+      let submittedPhoneNumbers =
+        JSON.parse(localStorage.getItem("submittedPhoneNumbers")) || [];
+      if (submittedPhoneNumbers.includes(phone)) {
+        toast.warning(
+          "Note: This phone number may have already been used in this session."
+        );
+      }
     }
   };
 
@@ -220,7 +299,7 @@ export default function AdmissionQuery({ utmParams }) {
                           required={field.required}
                         >
                           <option value="">{field.placeholder}</option>
-                          {field.name === "cityid" && cities.length > 0
+                          {field.name === "city" && cities.length > 0
                             ? cities.map((city) => (
                                 <option key={city} value={city}>
                                   {city}
@@ -258,6 +337,9 @@ export default function AdmissionQuery({ utmParams }) {
                               : "border-gray-200"
                           } bg-white focus:outline-none focus:border-cusGreen focus:ring-1 focus:ring-cusGreen text-sm transition-all duration-200`}
                           required={field.required}
+                          onBlur={
+                            field.name === "phone" ? handlePhoneBlur : undefined
+                          }
                         />
                       )}
                       {errors[field.name] && (
