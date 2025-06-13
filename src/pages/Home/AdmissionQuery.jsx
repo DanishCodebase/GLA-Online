@@ -182,7 +182,7 @@ export default function AdmissionQuery({ utmParams }) {
         setFormData(initialFormData);
         setErrors({});
         closeAdmissionForm();
-        window.location.href = "/thanks.html";
+        window.location.href = "/thankyou.html";
       } else {
         if (responseData.isDuplicate) {
           toast.error(
