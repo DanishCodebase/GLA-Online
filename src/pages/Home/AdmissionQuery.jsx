@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { X, ArrowRight, Send } from "lucide-react";
-// import { submitAdmissionQuery } from "@/pages/Home/crm";
+import { submitAdmissionQuery } from "@/pages/Home/crm";
 
 import { toast } from "sonner";
 import { getAllStates, getCitiesForState } from "@/pages/Home/stateData";
@@ -153,25 +153,28 @@ export default function AdmissionQuery({ utmParams }) {
 
     setIsSubmitting(true);
 
-    const dataToSend = {
-      ...formData,
-      campaign: utmParams?.campaign || utmParams?.utm_campaign,
-      utm_source: utmParams?.utm_source,
-      utm_medium: utmParams?.utm_medium,
-      utm_term: utmParams?.utm_term,
-      utm_content: utmParams?.utm_content,
-    };
-
     try {
-      const response = await fetch("https://nocolleges.com/submit.php", {
+      // Submit to CRM
+      const crmResult = await submitAdmissionQuery(formData, () => {});
+
+      // Submit to Google Sheets
+      const sheetsResponse = await fetch("https://nocolleges.com/submit.php", {
         method: "POST",
-        body: JSON.stringify(dataToSend),
+        body: JSON.stringify({
+          ...formData,
+          campaign: utmParams?.campaign || utmParams?.utm_campaign,
+          utm_source: utmParams?.utm_source,
+          utm_medium: utmParams?.utm_medium,
+          utm_term: utmParams?.utm_term,
+          utm_content: utmParams?.utm_content,
+        }),
       });
 
-      const responseData = await response.json(); // Parse the JSON response
+      const sheetsData = await sheetsResponse.json();
 
-      if (responseData.success) {
-        toast.success(responseData.message || "Form submitted successfully!");
+      // Handle success case
+      if (crmResult.success || sheetsData.success) {
+        toast.success("Form submitted successfully!");
         if (!submittedPhoneNumbers.includes(formData.phone)) {
           submittedPhoneNumbers.push(formData.phone);
           localStorage.setItem(
@@ -184,10 +187,10 @@ export default function AdmissionQuery({ utmParams }) {
         closeAdmissionForm();
         window.location.href = "/thankyou.html";
       } else {
-        if (responseData.isDuplicate) {
+        // Handle error case
+        if (sheetsData.isDuplicate) {
           toast.error(
-            responseData.message ||
-              "This phone number has already been used to submit an inquiry."
+            "This phone number has already been used to submit an inquiry."
           );
           if (!submittedPhoneNumbers.includes(formData.phone)) {
             submittedPhoneNumbers.push(formData.phone);
@@ -197,9 +200,7 @@ export default function AdmissionQuery({ utmParams }) {
             );
           }
         } else {
-          toast.error(
-            responseData.message || "Failed to submit form. Please try again."
-          );
+          toast.error("Failed to submit form. Please try again.");
         }
       }
     } catch (error) {
