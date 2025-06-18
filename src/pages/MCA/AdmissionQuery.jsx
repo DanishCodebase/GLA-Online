@@ -156,7 +156,7 @@ export default function AdmissionQuery({ utmParams }) {
       const crmResult = await submitAdmissionQuery(formData, () => {});
 
       // Submit to Google Sheets
-      const sheetsResponse = await fetch("https://nocolleges.com/submit.php", {
+      const sheetsResponse = await fetch("https://nocolleges.com/mca.php", {
         method: "POST",
         body: JSON.stringify({
           ...formData,
