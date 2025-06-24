@@ -83,7 +83,7 @@ const initialFormData = {
   city: "",
 };
 
-export default function AdmissionQuery({ utmParams }) {
+export default function AdmissionQuery() {
   const { isAdmissionFormOpen, openAdmissionForm, closeAdmissionForm } =
     useAdmissionForm();
   const [formData, setFormData] = useState(initialFormData);
@@ -154,27 +154,13 @@ export default function AdmissionQuery({ utmParams }) {
     setIsSubmitting(true);
 
     try {
-      // Submit to CRM
-      const crmResult = await submitAdmissionQuery(formData, () => {});
-
-      // Submit to Google Sheets
-      const sheetsResponse = await fetch("https://nocolleges.com/submit.php", {
-        method: "POST",
-        body: JSON.stringify({
-          ...formData,
-          campaign: utmParams?.campaign || utmParams?.utm_campaign,
-          utm_source: utmParams?.utm_source,
-          utm_medium: utmParams?.utm_medium,
-          utm_term: utmParams?.utm_term,
-          utm_content: utmParams?.utm_content,
-        }),
+      // The navigate function will be called inside submitAdmissionQuery on success
+      const result = await submitAdmissionQuery(formData, (path) => {
+        window.location.href = path;
       });
 
-      const sheetsData = await sheetsResponse.json();
-
-      // Handle success case
-      if (crmResult.success || sheetsData.success) {
-        toast.success("Form submitted successfully!");
+      if (result.success) {
+        toast.success(result.message);
         if (!submittedPhoneNumbers.includes(formData.phone)) {
           submittedPhoneNumbers.push(formData.phone);
           localStorage.setItem(
@@ -185,23 +171,10 @@ export default function AdmissionQuery({ utmParams }) {
         setFormData(initialFormData);
         setErrors({});
         closeAdmissionForm();
-        window.location.href = "/thankyou.html";
       } else {
-        // Handle error case
-        if (sheetsData.isDuplicate) {
-          toast.error(
-            "This phone number has already been used to submit an inquiry."
-          );
-          if (!submittedPhoneNumbers.includes(formData.phone)) {
-            submittedPhoneNumbers.push(formData.phone);
-            localStorage.setItem(
-              "submittedPhoneNumbers",
-              JSON.stringify(submittedPhoneNumbers)
-            );
-          }
-        } else {
-          toast.error("Failed to submit form. Please try again.");
-        }
+        toast.error(
+          result.message || "Failed to submit form. Please try again."
+        );
       }
     } catch (error) {
       toast.error("An unexpected error occurred. Please try again.");

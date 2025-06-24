@@ -1,45 +1,31 @@
 // src/services/backend.js
 
-const getAuthToken = async () => {
+export const submitLead = async (apiPayload) => {
   try {
-    const response = await fetch("https://glauniversity.in:8070/token", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: new URLSearchParams({
-        username: "EXT220001",
-        password: "out@gla",
-        grant_type: "password",
-      }),
-    });
-    const data = await response.json();
-    return data.access_token;
-  } catch (error) {
-    console.error("Error getting auth token:", error);
-    throw error;
-  }
-};
+    const baseUrl =
+      "https://glawebapi.glaonline.com/api/AdmissionRegistration/PostJsonRegistrationFormOnline_LP";
 
-export const submitLead = async (formData) => {
-  try {
-    const accessToken = await getAuthToken();
-
-    // Log the data being sent
-    console.log("Sending lead data:", formData);
-
-    const response = await fetch(
-      "https://glauniversity.in:8070/api/WebApi/PushLead",
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      }
+    const filteredPayload = Object.fromEntries(
+      Object.entries(apiPayload).filter(([, v]) => v !== undefined)
     );
+    const queryParams = new URLSearchParams(filteredPayload).toString();
+    const apiUrl = `${baseUrl}?${queryParams}`;
 
+    console.log("Sending GET request to API:", apiUrl);
+
+    const response = await fetch(apiUrl, {
+      method: "GET",
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error("API Error Response:", errorText);
+      throw new Error(
+        `API request failed with status ${response.status}: ${errorText}`
+      );
+    }
+
+    // The API returns a JSON-encoded string.
     const result = await response.json();
     return result;
   } catch (error) {
