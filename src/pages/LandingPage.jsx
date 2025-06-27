@@ -8,6 +8,7 @@ import FAQ from "@/pages/Home/FAQ";
 import AdmissionQuery from "@/pages/Home/AdmissionQuery";
 import { AdmissionFormProvider } from "@/context/AdmissionFormContext";
 import Header from "@/pages/Header/Header";
+import { Helmet } from "react-helmet-async";
 
 const LandingPage = () => {
   const [utmParams, setUtmParams] = useState({
@@ -25,16 +26,25 @@ const LandingPage = () => {
     });
   }, []);
   return (
-    <AdmissionFormProvider>
-      <AdmissionQuery utmParams={utmParams} />
-      {/* <Header /> */}
-      <HeroSection />
-      {/* <Hero /> */}
-      <Universities />
-      <WhoShouldEnroll />
-      <Benefits />
-      <FAQ />
-    </AdmissionFormProvider>
+    <>
+      <Helmet>
+        <title>Online MBA Program | GLA Online</title>
+        <meta
+          name="description"
+          content="Explore the best online MBA programs with GLA Online. Get detailed information on admission, courses, and universities."
+        />
+      </Helmet>
+      <AdmissionFormProvider>
+        <AdmissionQuery utmParams={utmParams} />
+        {/* <Header /> */}
+        <HeroSection />
+        {/* <Hero /> */}
+        <Universities />
+        <WhoShouldEnroll />
+        <Benefits />
+        <FAQ />
+      </AdmissionFormProvider>
+    </>
   );
 };
 

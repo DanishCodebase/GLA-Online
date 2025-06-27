@@ -39,7 +39,7 @@ const formFields = [
   {
     name: "coursesid",
     type: "hidden",
-    value: "8420",
+    value: "OGLAMCA201",
   },
   {
     name: "state",
@@ -67,7 +67,7 @@ const initialFormData = {
   name: "",
   email: "",
   phone: "",
-  coursesid: "8420",
+  coursesid: "OGLAMCA201",
   state: "",
   city: "",
 };
@@ -142,22 +142,16 @@ export default function AdmissionQuery({ utmParams }) {
 
     setIsSubmitting(true);
 
-    const dataToSend = {
-      ...formData,
-      campaign: utmParams?.campaign || utmParams?.utm_campaign,
-      utm_source: utmParams?.utm_source,
-      utm_medium: utmParams?.utm_medium,
-      utm_term: utmParams?.utm_term,
-      utm_content: utmParams?.utm_content,
-    };
-
     try {
       // Submit to CRM
-      const crmResult = await submitAdmissionQuery(formData, () => {});
+      const crmResult = await submitAdmissionQuery(formData);
 
       // Submit to Google Sheets
       const sheetsResponse = await fetch("https://nocolleges.com/mca.php", {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
           ...formData,
           campaign: utmParams?.campaign || utmParams?.utm_campaign,

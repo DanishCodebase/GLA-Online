@@ -36,22 +36,11 @@ const formFields = [
     errorMessage:
       "Please enter a valid 10-digit phone number starting with 6, 7, 8, or 9",
   },
-  // {
-  //   name: "coursesid",
-  //   label: "Course",
-  //   type: "select",
-  //   placeholder: "Select a course",
-  //   required: true,
-  //   validation: (value) => value !== "",
-  //   errorMessage: "Please select a course",
-  //   options: [
-  //     { value: "1500", label: "B.Tech" },
-  //     { value: "1550", label: "B.Tech (AI & ML)" },
-  //     { value: "4201", label: "BCA" },
-  //     { value: "4101", label: "BBA" },
-  //     { value: "8410", label: "MBA" },
-  //   ],
-  // },
+  {
+    name: "coursesid",
+    type: "hidden",
+    value: "OGLAMBA201",
+  },
   {
     name: "state",
     label: "State",
@@ -78,7 +67,7 @@ const initialFormData = {
   name: "",
   email: "",
   phone: "",
-  // coursesid: "",
+  coursesid: "OGLAMBA201",
   state: "",
   city: "",
 };
@@ -154,13 +143,35 @@ export default function AdmissionQuery() {
     setIsSubmitting(true);
 
     try {
-      // The navigate function will be called inside submitAdmissionQuery on success
-      const result = await submitAdmissionQuery(formData, (path) => {
-        window.location.href = path;
-      });
+      const storedUtmParams =
+        JSON.parse(localStorage.getItem("utmParams")) || {};
 
-      if (result.success) {
-        toast.success(result.message);
+      const dataForSheet = {
+        ...formData,
+        utm_source: storedUtmParams.utm_source,
+        utm_medium: storedUtmParams.utm_medium,
+        utm_campaign: storedUtmParams.utm_campaign,
+        utm_term: storedUtmParams.utm_term,
+        utm_content: storedUtmParams.utm_content,
+      };
+
+      // Run both submissions in parallel
+      const [crmResult, sheetsResponse] = await Promise.all([
+        submitAdmissionQuery(formData),
+        fetch("https://www.nocolleges.com/submit.php", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(dataForSheet),
+        }),
+      ]);
+
+      const sheetsData = await sheetsResponse.json();
+
+      // Handle success case
+      if (crmResult.success || sheetsData.success) {
+        toast.success("Form submitted successfully!");
         if (!submittedPhoneNumbers.includes(formData.phone)) {
           submittedPhoneNumbers.push(formData.phone);
           localStorage.setItem(
@@ -171,10 +182,25 @@ export default function AdmissionQuery() {
         setFormData(initialFormData);
         setErrors({});
         closeAdmissionForm();
+        window.location.href = "/thankyou.html";
       } else {
-        toast.error(
-          result.message || "Failed to submit form. Please try again."
-        );
+        // Handle error case
+        if (sheetsData.isDuplicate) {
+          toast.error(
+            "This phone number has already been used to submit an inquiry."
+          );
+          if (!submittedPhoneNumbers.includes(formData.phone)) {
+            submittedPhoneNumbers.push(formData.phone);
+            localStorage.setItem(
+              "submittedPhoneNumbers",
+              JSON.stringify(submittedPhoneNumbers)
+            );
+          }
+        } else {
+          toast.error(
+            crmResult.message || "Failed to submit form. Please try again."
+          );
+        }
       }
     } catch (error) {
       toast.error("An unexpected error occurred. Please try again.");

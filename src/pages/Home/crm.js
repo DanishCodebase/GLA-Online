@@ -1,30 +1,17 @@
 import { submitLead } from "@/pages/Home/backend";
 
-const getUTMParams = () => {
-  const urlParams = new URLSearchParams(window.location.search);
-  return {
-    source: urlParams.get("utm_source") || "website",
-    medium: urlParams.get("utm_medium") || "",
-    campaign: urlParams.get("utm_campaign") || "",
-  };
-};
-
-export const submitAdmissionQuery = async (formData, navigate) => {
+export const submitAdmissionQuery = async (formData) => {
   try {
     console.log("Raw form data received for new API:", formData);
 
-    const utmParams = getUTMParams();
-
     const apiPayload = {
       Name: formData.name,
-      Day: "01",
-      Month: "01",
-      Year: "1990",
+      DOB: "12/7/2000",
       EmailId: formData.email,
       Mobile: formData.phone,
-      ProgramCode: "OGLAMBA201",
-      source: utmParams.source,
-      City: "301",
+      ProgramCode: formData.coursesid || "OGLAMBA201",
+      source: "Stealth",
+      City: formData.city,
       MobileOTP: "undefined",
     };
 
@@ -37,7 +24,6 @@ export const submitAdmissionQuery = async (formData, navigate) => {
       typeof response === "string" &&
       response.startsWith("1@@")
     ) {
-      navigate("/thankyou");
       return {
         success: true,
         message: "Your query has been submitted successfully!",
