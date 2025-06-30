@@ -72,7 +72,7 @@ const initialFormData = {
   city: "",
 };
 
-export default function AdmissionQuery() {
+export default function AdmissionQuery({ utmParams }) {
   const { isAdmissionFormOpen, openAdmissionForm, closeAdmissionForm } =
     useAdmissionForm();
   const [formData, setFormData] = useState(initialFormData);
@@ -143,21 +143,22 @@ export default function AdmissionQuery() {
     setIsSubmitting(true);
 
     try {
-      const storedUtmParams =
-        JSON.parse(localStorage.getItem("utmParams")) || {};
-
-      const dataForSheet = {
+      const sanitizedFormData = {
         ...formData,
-        utm_source: storedUtmParams.utm_source,
-        utm_medium: storedUtmParams.utm_medium,
-        utm_campaign: storedUtmParams.utm_campaign,
-        utm_term: storedUtmParams.utm_term,
-        utm_content: storedUtmParams.utm_content,
+        city: formData.city.replace(/\s/g, ""),
+      };
+      const dataForSheet = {
+        ...sanitizedFormData,
+        utm_source: "Stealth",
+        utm_medium: utmParams?.utm_medium,
+        utm_campaign: utmParams?.utm_campaign,
+        utm_term: utmParams?.utm_term,
+        utm_content: utmParams?.utm_content,
       };
 
       // Run both submissions in parallel
       const [crmResult, sheetsResponse] = await Promise.all([
-        submitAdmissionQuery(formData),
+        submitAdmissionQuery(sanitizedFormData, utmParams),
         fetch("https://www.nocolleges.com/submit.php", {
           method: "POST",
           headers: {

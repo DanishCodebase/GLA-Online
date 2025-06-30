@@ -143,8 +143,15 @@ export default function AdmissionQuery({ utmParams }) {
     setIsSubmitting(true);
 
     try {
+      const sanitizedFormData = {
+        ...formData,
+        city: formData.city.replace(/\s/g, ""),
+      };
       // Submit to CRM
-      const crmResult = await submitAdmissionQuery(formData);
+      const crmResult = await submitAdmissionQuery(
+        sanitizedFormData,
+        utmParams
+      );
 
       // Submit to Google Sheets
       const sheetsResponse = await fetch("https://nocolleges.com/mca.php", {
@@ -153,9 +160,9 @@ export default function AdmissionQuery({ utmParams }) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          ...formData,
+          ...sanitizedFormData,
           campaign: utmParams?.campaign || utmParams?.utm_campaign,
-          utm_source: utmParams?.utm_source,
+          utm_source: "Stealth",
           utm_medium: utmParams?.utm_medium,
           utm_term: utmParams?.utm_term,
           utm_content: utmParams?.utm_content,

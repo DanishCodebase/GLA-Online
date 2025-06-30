@@ -9,22 +9,25 @@ import AdmissionQuery from "@/pages/MCA/AdmissionQuery";
 import { AdmissionFormProvider } from "@/context/AdmissionFormContext";
 import Header from "@/pages/Header/Header";
 import { Helmet } from "react-helmet-async";
+import { useLocation } from "react-router-dom";
 
 const MCA = () => {
-  const [utmParams, setUtmParams] = useState({
-    source: "",
-    medium: "",
-    campaign: "",
-  });
+  const location = useLocation();
+  const [utmParams, setUtmParams] = useState({});
 
   useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    setUtmParams({
-      source: urlParams.get("utm_source") || "",
-      medium: urlParams.get("utm_medium") || "",
-      campaign: urlParams.get("utm_campaign") || "",
-    });
-  }, []);
+    const searchParams = new URLSearchParams(location.search);
+    const params = {
+      utm_source: searchParams.get("utm_source"),
+      utm_medium: searchParams.get("utm_medium"),
+      utm_campaign: searchParams.get("utm_campaign"),
+      utm_term: searchParams.get("utm_term"),
+      utm_content: searchParams.get("utm_content"),
+      campaign: searchParams.get("campaign"),
+    };
+    setUtmParams(params);
+  }, [location.search]);
+
   return (
     <>
       <Helmet>

@@ -1,6 +1,6 @@
 import { submitLead } from "@/pages/Home/backend";
 
-export const submitAdmissionQuery = async (formData) => {
+export const submitAdmissionQuery = async (formData, utmParams = {}) => {
   try {
     console.log("Raw form data received for new API:", formData);
 
@@ -12,7 +12,10 @@ export const submitAdmissionQuery = async (formData) => {
       ProgramCode: formData.coursesid || "OGLAMBA201",
       source: "Stealth",
       City: formData.city,
-      MobileOTP: "undefined",
+      utm_medium: utmParams.utm_medium,
+      utm_campaign: utmParams.utm_campaign || utmParams.campaign,
+      utm_term: utmParams.utm_term,
+      utm_content: utmParams.utm_content,
     };
 
     console.log("Constructed payload for new API:", apiPayload);
