@@ -1,18 +1,6 @@
 <?php
-// Handle preflight requests for CORS
-if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
-    header('Access-Control-Allow-Origin: *');
-    header('Access-Control-Allow-Methods: POST, OPTIONS');
-    header('Access-Control-Allow-Headers: Content-Type');
-    header('Access-Control-Max-Age: 86400'); // Cache preflight for 1 day
-    http_response_code(204); // No Content for OPTIONS
-    exit();
-}
-
-// Set headers for the actual request
-header('Access-Control-Allow-Origin: *'); // Be more specific in production if possible
-header('Access-Control-Allow-Methods: POST, OPTIONS');
-header('Access-Control-Allow-Headers: Content-Type');
+// Remove the CORS headers from here since they're now handled by .htaccess
+// Only keep the Content-Type header
 header('Content-Type: application/json');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
