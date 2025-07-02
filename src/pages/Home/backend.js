@@ -3,7 +3,7 @@
 export const submitLead = async (apiPayload) => {
   try {
     const baseUrl =
-      "https://glawebapi.glaonline.com/api/ChannelPartner/CPRegistrationOnline_API";
+      "https://glawebapi.glaonline.com/api/ChannelPartner/GLACampaignPostAPI";
 
     const filteredPayload = Object.fromEntries(
       Object.entries(apiPayload).filter(([, v]) => v !== undefined)

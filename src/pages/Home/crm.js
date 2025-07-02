@@ -10,12 +10,10 @@ export const submitAdmissionQuery = async (formData, utmParams = {}) => {
       EmailId: formData.email,
       Mobile: formData.phone,
       ProgramCode: formData.coursesid || "OGLAMBA201",
-      source: "Stealth",
       City: formData.city,
-      utm_medium: utmParams.utm_medium,
-      utm_campaign: utmParams.utm_campaign || utmParams.campaign,
-      utm_term: utmParams.utm_term,
-      utm_content: utmParams.utm_content,
+      source: utmParams.utm_source || "Stealth",
+      Medium: utmParams.utm_medium,
+      Campaign: utmParams.utm_campaign || utmParams.campaign,
     };
 
     console.log("Constructed payload for new API:", apiPayload);
