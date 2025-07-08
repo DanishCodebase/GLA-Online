@@ -29,7 +29,7 @@ export default function Banner({ utmParams }) {
 
       {/* Mobile Banner: Form below the image */}
       <div className="sm:hidden">
-        <section className="relative w-full h-[60vh]">
+        <section className="relative w-full h-[50vh]">
           <img
             src={mbaMobile}
             alt="MBA students studying online"

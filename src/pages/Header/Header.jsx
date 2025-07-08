@@ -13,20 +13,20 @@ const Header = () => {
           class="flex items-center space-x-3 rtl:space-x-reverse"
         > */}
         <img src={logo} className="h-16" alt="NoCollege Logo" />
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="sm:flex hidden flex-wrap items-center gap-2">
           <img
             src={naac}
-            className="h-16 hidden sm:block mix-blend-multiply brightness-110"
+            className="h-16 mix-blend-multiply brightness-110"
             alt="NAAC Accreditation"
           />
           <img
             src={nirf}
-            className="h-16 hidden sm:block mix-blend-multiply brightness-110"
+            className="h-16 mix-blend-multiply brightness-110"
             alt="NIRF Ranking"
           />
           <img
             src={times}
-            className="h-16 hidden sm:block mix-blend-multiply brightness-110"
+            className="h-16 mix-blend-multiply brightness-110"
             alt="Times Higher Education Ranking"
           />
         </div>

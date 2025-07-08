@@ -45,6 +45,7 @@ const LandingPage = () => {
         <AdmissionQuery utmParams={utmParams} />
         {/* <Header /> */}
         <Banner utmParams={utmParams} />
+        <AccreditationLogoMobile /> 
         <Universities />
         <Benefits />
         <WhoShouldEnroll />
