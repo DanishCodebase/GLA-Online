@@ -3,23 +3,46 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import mba from "@/assets/nocollege-hero.png";
 import mbaMobile from "@/assets/nocollege-hero-sm.png";
+import StaticAdmissionForm from "./StaticAdmissionForm";
 
-export default function HeroSection() {
+export default function Banner({ utmParams }) {
   return (
-    <section className="py-10 px-4 h-[60vh] w-full sm:h-[calc(100vh-72px)]">
-      <div className="sm:absolute inset-0">
-        <img
-          src={mba}
-          alt="MBA students studying online"
-          className="w-full h-full object-cover hidden sm:block"
-        />
-        <img
-          src={mbaMobile}
-          alt="MBA students studying online"
-          className="w-full h-full object-cover scale-110 aspect-square object-center block sm:hidden"
-        />
-        {/* <div className="absolute inset-0 bg-black opacity-50"></div> */}
+    <>
+      {/* Desktop Banner: Form on the right */}
+      <div className="hidden sm:block">
+        <section className="relative w-full h-[calc(100vh-72px)]">
+          <div className="absolute inset-0">
+            <img
+              src={mba}
+              alt="MBA students studying online"
+              className="w-full h-full object-cover"
+            />
+            {/* <div className="absolute inset-0 bg-black/30" /> */}
+          </div>
+          <div className="relative z-10 h-full flex items-center justify-end p-8">
+            <div className="w-full max-w-sm mr-[10%]">
+              <StaticAdmissionForm utmParams={utmParams} />
+            </div>
+          </div>
+        </section>
       </div>
-    </section>
+
+      {/* Mobile Banner: Form below the image */}
+      <div className="sm:hidden">
+        <section className="relative w-full h-[60vh]">
+          <img
+            src={mbaMobile}
+            alt="MBA students studying online"
+            className="w-full h-full object-cover"
+          />
+          {/* <div className="absolute inset-0 bg-black/30" /> */}
+        </section>
+        <div className="p-4 bg-white">
+          <div className="relative z-10 -mt-8">
+            <StaticAdmissionForm utmParams={utmParams} />
+          </div>
+        </div>
+      </div>
+    </>
   );
 }

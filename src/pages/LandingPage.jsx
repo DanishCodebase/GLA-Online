@@ -44,13 +44,10 @@ const LandingPage = () => {
       <AdmissionFormProvider>
         <AdmissionQuery utmParams={utmParams} />
         {/* <Header /> */}
-        {/* <HeroSection /> */}
-        <Banner />
-        {/* <AccreditationLogoMobile /> */}
-        {/* <Hero /> */}
+        <Banner utmParams={utmParams} />
         <Universities />
-        <WhoShouldEnroll />
         <Benefits />
+        <WhoShouldEnroll />
         <FAQ />
       </AdmissionFormProvider>
     </>
