@@ -43,10 +43,10 @@ const LandingPage = () => {
       </Helmet>
       <AdmissionFormProvider>
         <AdmissionQuery utmParams={utmParams} />
-        {/* <AccreditationLogoMobile /> */}
         {/* <Header /> */}
         {/* <HeroSection /> */}
         <Banner />
+        {/* <AccreditationLogoMobile /> */}
         {/* <Hero /> */}
         <Universities />
         <WhoShouldEnroll />

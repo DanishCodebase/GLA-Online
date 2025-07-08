@@ -1,5 +1,4 @@
 import { cn } from "@/lib/utils";
-import Marquee from "@/components/ui/marquee";
 import naac from "@/assets/c-naac.jpg";
 import nirf from "@/assets/c-nirf.jpg";
 import times from "@/assets/c-times.jpg";
@@ -23,7 +22,7 @@ const ReviewCard = ({ img }) => {
   return (
     <figure
       className={cn(
-        "relative w-auto cursor-pointer overflow-hidden rounded-xl border p-4",
+        "relative h-full w-max cursor-pointer overflow-hidden rounded-xl border p-4",
         // light styles
         "border-gray-950/[.1] bg-gray-950/[.01] bg-white",
         // dark styles
@@ -31,7 +30,7 @@ const ReviewCard = ({ img }) => {
       )}
     >
       <div className="flex flex-row justify-center items-center gap-2 ">
-        <img className="rounded  h-24" src={img} />
+        <img className="rounded h-24" src={img} />
       </div>
     </figure>
   );
@@ -40,11 +39,11 @@ const ReviewCard = ({ img }) => {
 export function AccreditationLogoMobile() {
   return (
     <div className="relative flex max-w-7xl mx-auto py-4 sm:py-10 flex-col items-center justify-center overflow-hidden">
-      <Marquee pauseOnHover className="[--duration:8s]">
+      <div className="flex flex-wrap justify-center gap-4">
         {reviews.map((review) => (
           <ReviewCard key={review.id} {...review} />
         ))}
-      </Marquee>
+      </div>
       {/* <Marquee pauseOnHover reverse className="[--duration:5s]">
         {reviews.map((review) => (
           <ReviewCard key={review.id} {...review} />
