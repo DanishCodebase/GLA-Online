@@ -10,6 +10,8 @@ import { AdmissionFormProvider } from "@/context/AdmissionFormContext";
 import Header from "@/pages/Header/Header";
 import { Helmet } from "react-helmet-async";
 import { useLocation } from "react-router-dom";
+import Banner from "./Home/Banner";
+import { AccreditationLogoMobile } from "@/components/AccreditationLogoMobile";
 
 const LandingPage = () => {
   const location = useLocation();
@@ -41,8 +43,10 @@ const LandingPage = () => {
       </Helmet>
       <AdmissionFormProvider>
         <AdmissionQuery utmParams={utmParams} />
+        {/* <AccreditationLogoMobile /> */}
         {/* <Header /> */}
-        <HeroSection />
+        {/* <HeroSection /> */}
+        <Banner />
         {/* <Hero /> */}
         <Universities />
         <WhoShouldEnroll />
