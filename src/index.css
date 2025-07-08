@@ -3,24 +3,58 @@
 
 @custom-variant dark (&:is(.dark *));
 
-@theme inline {
-  --animate-marquee: marquee var(--duration) infinite linear;
-  --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
+@theme {
+  /*
+    Define the default (light mode) color palette here.
+    Only custom properties and @keyframes are allowed in this block.
+  */
+  --color-border: oklch(85.58% 0.024 264.44); /* #d4d4d8 */
+  --color-ring: oklch(42.36% 0.048 263.67);   /* #52525b */
+  --color-background: oklch(100% 0 0);          /* #ffffff */
+  --color-foreground: oklch(9.25% 0.026 264.83);    /* #18181b */
+
+  /* Keyframe animations for the marquee utilities */
   @keyframes marquee {
-  from {
-    transform: translateX(0);
+    from {
+      transform: translateX(0);
     }
-  to {
-    transform: translateX(calc(-100% - var(--gap)));
+    to {
+      transform: translateX(calc(-100% - var(--gap)));
     }
   }
   @keyframes marquee-vertical {
-  from {
-    transform: translateY(0);
+    from {
+      transform: translateY(0);
     }
-  to {
-    transform: translateY(calc(-100% - var(--gap)));
+    to {
+      transform: translateY(calc(-100% - var(--gap)));
     }
+  }
+}
+
+/*
+  Define dark mode variable overrides outside of @theme.
+  The `@dark` rule uses the custom variant we defined at the top.
+*/
+@dark {
+  :root {
+    --color-border: oklch(26.54% 0.024 262.1); /* #3f3f46 */
+    --color-ring: oklch(83.92% 0.018 261.45);   /* #d4d4d8 */
+    --color-background: oklch(9.25% 0.026 264.83);    /* #18181b */
+    --color-foreground: oklch(98.01% 0.006 262.33); /* #fafafa */
+  }
+}
+
+@layer base {
+  * {
+    /*
+      The `border-border` class was failing because the `--color-border` variable
+      was not defined in your theme. It's fixed now.
+    */
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
   }
 }
 
@@ -30,14 +64,5 @@
   }
   .animate-marquee-vertical {
     animation: marquee-vertical var(--duration) linear infinite;
-  }
-}
-
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
   }
 }
