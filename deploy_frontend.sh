@@ -19,6 +19,6 @@ pnpm run build
 
 # Copy build output to LIVE SITE ROOT
 echo "Copying build output to live site..."
-cp -rT /var/www/running_sites/nocolleges.com/GLA-Online/dist  /var/www/running_sites/nocolleges.com/
+cp -rT /var/www/running_sites/nocolleges.com/GLA-Online/dist  /var/www/running_sites/nocolleges.com/public_html/
 
 echo "===== GLA-Online Frontend Deploy Completed ====="
